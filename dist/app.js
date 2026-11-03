@@ -25,8 +25,9 @@ $('download').onclick=()=>{const lines=cart.map(l=>{const p=products.find(p=>p.i
 
 function updateOrderEmail(){
  const link=$('emailOrder');
- link.setAttribute('aria-disabled',String(!cart.length));
- if(!cart.length){link.removeAttribute('href');link.tabIndex=-1;return;}
+ const billingValid=!$('namedInvoice').checked||$('billingForm').checkValidity();
+ link.setAttribute('aria-disabled',String(!cart.length||!billingValid));
+ if(!cart.length||!billingValid){link.removeAttribute('href');link.tabIndex=-1;return;}
  const lines=cart.map(l=>{const p=products.find(p=>p.id===l.id),v=p.variants[l.v];return `${p.id} | ${p.name} | ${v.label}${l.aroma?' | Aroma: '+l.aroma:''} | Cantidad: ${l.qty} | Unitario: ${money(v.price)} | Subtotal: ${money(v.price*l.qty)}`;});
  const total=cart.reduce((sum,l)=>sum+products.find(p=>p.id===l.id).variants[l.v].price*l.qty,0);
  const body=`Hola, equipo GELD:
@@ -38,9 +39,10 @@ ${lines.join('\n')}
 Subtotal del catálogo antes de IVA: ${money(total)}
 Por favor confirmar IVA, costo de envío, disponibilidad y plazo de entrega antes del pago.
 
-Datos de contacto y entrega (completar antes de enviar):
-Nombre:
-Empresa:
+${billingEmailText()}
+
+Datos para coordinar la entrega (completar si aplica):
+Contacto para entrega:
 Teléfono de contacto:
 Ciudad y dirección de entrega:
 Observaciones:
@@ -51,3 +53,19 @@ Preparado desde el catálogo GELD.`;
 }
 
 $('copyPaymentKey').onclick=async()=>{try{await navigator.clipboard.writeText('@901247877');toast('Llave Bre-B copiada: @901247877')}catch{toast('Copia esta llave: @901247877')}};
+
+function billingEmailText(){
+ if(!$('namedInvoice').checked)return 'FACTURACIÓN\nNo solicito factura a mi nombre. Solicito factura como consumidor final.';
+ const clean=id=>$(id).value.trim().replace(/[\r\n]+/g,' ');
+ return `DATOS PARA FACTURACIÓN ELECTRÓNICA\nNombre o razón social: ${clean('billingName')}\nTipo de identificación: ${$('billingType').value}\nNúmero de identificación: ${clean('billingDocument')}\nCorreo para factura: ${clean('billingEmail')||'No indicado; solicito representación impresa.'}`;
+}
+function refreshBilling(){
+ const named=$('namedInvoice').checked;$('billingFields').disabled=!named;$('billingFields').hidden=!named;
+ $('billingName').setCustomValidity(named&&$('billingName').value&&!$('billingName').value.trim()?'Escribe un nombre o razón social.':'');
+ $('billingStatus').textContent=!named?'Solicitud sin factura a nombre del comprador.':$('billingForm').checkValidity()?'Datos listos para incluir en el correo.':'Completa nombre y documento; revisa el correo si lo indicaste.';
+ updateOrderEmail();
+}
+$('billingForm').addEventListener('input',refreshBilling);$('billingForm').addEventListener('change',refreshBilling);
+$('billingForm').addEventListener('submit',e=>{e.preventDefault();refreshBilling()});
+$('emailOrder').addEventListener('click',e=>{if(!cart.length||!$('billingForm').reportValidity())e.preventDefault()});
+refreshBilling();

@@ -33,3 +33,7 @@ El carrito prepara un enlace mailto dirigido a Productosgel@gmail.com con produc
 ## Pago manual Bre-B
 
 Llave receptora proporcionada por el solicitante: @901247877. Titular informado: INDUSTRIAS WRX SAS. Mostrar estos datos no verifica su inscripción ni confirma transacciones. El comprador debe confirmar el destinatario en su banco y esperar la cotización final con impuestos y envío. El comprobante se remite al correo de pedidos; GELD verifica el ingreso. Sin cobros automáticos ni conciliación bancaria.
+
+## Facturación electrónica
+
+El carrito permite solicitar factura a nombre del comprador y recoge nombre o razón social, tipo y número de identificación, y correo opcional para entrega electrónica. Si el comprador no facilita correo, se pide representación impresa. Puede optar por no solicitar factura a su nombre. No se exige RUT ni se usa dirección o teléfono como requisitos de facturación; los datos logísticos se completan por separado en el mensaje si aplican. Los campos se mantienen solo durante la sesión de la página y no se escriben en localStorage. Se incluyen en el correo al preparar la solicitud; no se envían automáticamente. La emisión de la factura corresponde al sistema de facturación del proveedor.
