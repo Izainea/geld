@@ -25,3 +25,11 @@ Repositorio esperado: `geld`, rama `main`. En Settings → Pages → Build and d
 ## Antes de operar comercialmente
 
 Confirmar con la empresa referencias, precios, impuestos, inventario, formulaciones, fichas de seguridad, imágenes y permisos de marca. Conectar luego el flujo comercial aprobado y los servicios de pedidos/pagos. La demo no envía información a un proveedor ni simula confirmaciones de compra.
+
+## Solicitudes por correo
+
+El carrito prepara un enlace mailto dirigido a Productosgel@gmail.com con productos, presentaciones, aromas, cantidades y subtotal antes de IVA. El cliente completa sus datos y envía desde su aplicación de correo. La página no envía mensajes automáticamente ni confirma pagos o pedidos. IVA, disponibilidad y envío se confirman con el proveedor antes de pagar.
+
+## Pago manual Bre-B
+
+Llave receptora proporcionada por el solicitante: @901247877. Titular informado: INDUSTRIAS WRX SAS. Mostrar estos datos no verifica su inscripción ni confirma transacciones. El comprador debe confirmar el destinatario en su banco y esperar la cotización final con impuestos y envío. El comprobante se remite al correo de pedidos; GELD verifica el ingreso. Sin cobros automáticos ni conciliación bancaria.

@@ -29,3 +29,18 @@ test('sin desbordamiento horizontal ni errores de ejecución',async({page})=>{
  const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.reload();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();expect(errors).toEqual([]);
 });
+
+test('correo de pedido con destinatario y presentación correctos sin enviarlo',async({page})=>{
+ await page.locator('#openCart').click();await expect(page.locator('#emailOrder')).not.toHaveAttribute('href');
+ await page.getByRole('button',{name:'Cerrar cotización'}).click();
+ await page.getByLabel('Presentación de Detergente textil industrial',{exact:true}).selectOption('1');
+ await page.getByRole('button',{name:'Agregar Detergente textil industrial',exact:true}).click();await page.locator('#openCart').click();
+ const href=await page.locator('#emailOrder').getAttribute('href');const url=new URL(href);
+ expect(url.protocol).toBe('mailto:');expect(url.pathname).toBe('Productosgel@gmail.com');
+ const body=url.searchParams.get('body');expect(body).toContain('1 galón');expect(body).toContain('25.000');expect(body).toContain('Cantidad: 1');expect(body).toContain('USO EXCLUSIVO INDUSTRIAL');
+ await page.getByRole('button',{name:'Quitar',exact:true}).click();await expect(page.locator('#emailOrder')).not.toHaveAttribute('href');
+});
+
+test('pago manual con titular, llave y condiciones antes de transferir',async({page})=>{
+ await page.locator('#openCart').click();await expect(page.locator('.paymentInfo')).toContainText('INDUSTRIAS WRX SAS');await expect(page.locator('.paymentKey code')).toHaveText('@901247877');await expect(page.locator('.paymentInfo')).toContainText('total con IVA y envío');await expect(page.getByRole('button',{name:'Copiar llave',exact:true})).toBeVisible();
+});
