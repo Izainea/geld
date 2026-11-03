@@ -1,0 +1,1 @@
+{"name":"geld","version":"1.0.0","private":true,"description":"PoC de catálogo y cotizaciones GELD","scripts":{"check":"node --check dist/app.js && node --check dist/products.js","test":"playwright test"},"devDependencies":{"@playwright/test":"1.56.1"}}
