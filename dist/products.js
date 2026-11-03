@@ -11,7 +11,7 @@ const rows = [
 ['DVI2','Lavavajillas neutro sin aroma',0,[7500,22000,100000],'Limpieza de vajilla y utensilios sin fragancia.','Cocina',5],
 ['ACI0','Ácido acético grado industrial 10%',0,[5500,15000,65000],'Vinagre industrial para limpieza y remoción de óxidos.','Superficies',5],
 ['SCI1','Silicona multiusos 15%',0,[7000,11000,19500,66000,280000],'Brillo y protección para cueros y materiales sintéticos.','Superficies',6,'Tutty Frutty'],
-['DI1','Desengrasante industrial doméstico',1,[7000,18000,80000],'Para superficies y utensilios de cocina contaminados con grasa.','Cocina',7],
+['DI1','Desengrasante industrial',1,[7000,18000,80000],'Para superficies y utensilios de cocinas industriales contaminados con grasa.','Cocina',7],
 ['DRX1','Desengrasante de alto rendimiento',1,[8000,23000,105000],'Limpieza de grasa en operaciones de trabajo pesado.','Cocina',7],
 ['AE70','Alcohol etílico 70%',2,[9000,28000,125000],'Solución alcohólica para desinfección de superficies y prendas.','Superficies',8],
 ['HC5','Hipoclorito de sodio 5,5%',2,[4500,10000,45000],'Limpieza y desinfección de materiales, superficies y utensilios.','Superficies',8],
